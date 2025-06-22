@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .increment {
+      background-color: green;
+      width: 100px;
+      height: 50px;
+      color: white;
+      border: none;
+      font-size: large;
+    }
+    .decrement {
+      background-color: red;
+      width: 100px;
+      height: 50px;
+      color: white;
+      border: none;
+      font-size: large;
+    }
+    .C {
+      max-width: 1150px;
+      margin: 0 auto;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .count {
+      font-size: 50px;
+    }
+  </style>
+  <body>
+    <div class="C">
+      <button class="decrement" id="decrement">Decrement</button>
+      <span class="count" id="counter">0</span>
+      <button class="increment" id="increment">Increment</button>
+    </div>
+  </body>
+  <script src="index.js"></script>
+</html>
