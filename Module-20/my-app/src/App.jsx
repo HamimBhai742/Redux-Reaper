@@ -14,13 +14,24 @@ function App() {
     phone: '',
   };
   const reducer = (state, action) => {
+    console.log(action);
     switch (action.type) {
       case 'FIELD_UPDATE':
         return {
           ...state,
           [action.payload.field]: action.payload.value,
         };
-
+      case 'RESET':
+        return {
+          name: '',
+          email: '',
+          phone: '',
+        };
+      case 'CLEAR':
+        return {
+          ...state,
+          [action.payload.field]: "clrear",
+        };
       default:
         state;
     }
@@ -38,23 +49,49 @@ function App() {
       },
     });
   };
-  console.log(userInfo)
+  console.log(userInfo);
   const handelSubmit = (e) => {
     e.preventDefault();
     console.log(userInfo);
-
   };
 
   // const handelSubmit=(e)=>{
   //   e.preventDefault()
 
   // }
+  const handelCrea = (field) => {
+    dispatch({
+      type: 'CLEAR',
+      payload: {
+      field
+      },
+    });
+  };
   return (
     <div>
       <form className='form' onSubmit={handelSubmit}>
-        <input type='text' name='name' placeholder='name' onChange={handelOnChange} />
-        <input type='email' name='email' placeholder='email' onChange={handelOnChange} />
-        <input type='text' name='phone' placeholder='phone' onChange={handelOnChange} />
+        <div>
+          <input
+            type='text'
+            name='name'
+            placeholder='name'
+            onChange={handelOnChange}
+          />
+          <button onClick={() => handelCrea("name")}>Clear</button>
+        </div>
+        <input
+          type='email'
+          name='email'
+          placeholder='email'
+          onChange={handelOnChange}
+        />
+        <input
+          type='text'
+          name='phone'
+          placeholder='phone'
+          onChange={handelOnChange}
+        />
+        <button onClick={() => dispatch({ type: 'RESET' })}>Reset</button>
         <button type='submit'>Submit</button>
       </form>
     </div>
