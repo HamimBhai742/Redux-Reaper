@@ -1,0 +1,11 @@
+.form{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 500px;
+}
+
+.form input{
+  padding: 12px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif  ;
+}
