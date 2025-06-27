@@ -1,35 +1,58 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useAppDispatch, useAppSelector } from './redux/app/hooks';
+import { clearSubs, subtraction } from './redux/substraction/subsSlice';
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const dispatchs = useAppDispatch();
+  const { sub } = useAppSelector((state) => state.sub);
+  const handelSubmitBtn = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const value1 = form.value1.value;
+    const value2 = form.value2.value;
+    dispatchs(subtraction({ value1, value2 }));
+    form.reset();
+    console.log(value1, value2);
+  };
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+    <div>
+      <h1 className='text-center font-semibold text-3xl my-6'>
+        Substarction Two Number
+      </h1>
+      <div className='flex items-center justify-center'>
+        <form onSubmit={handelSubmitBtn}>
+          <div className='flex gap-4 items-center'>
+            <input
+              name='value1'
+              type='number'
+              className='max-w-20 border py-2'
+            />
+            <span className='font-bold'>{'-'}</span>
+            <input
+              name='value2'
+              type='number'
+              className='max-w-20 border py-2'
+            />
+            <span className='font-bold'>{'='}</span>
+            <span>{sub}</span>
+          </div>
+
+          <button
+            type='submit'
+            className='bg-blue-500 text-white py-2 px-4 rounded-sm mt-5'
+          >
+            Submit
+          </button>
+        </form>
+
+        <button
+          onClick={() => dispatchs(clearSubs())}
+          className='bg-red-500 btn text-white py-2 px-4 rounded-sm'
+        >
+          Clear
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
